@@ -15,18 +15,14 @@ Route::get('/', function () {
     return view('introduction');
 });
 
-Route::get('/{user_id}',function ($user_id) {
-	return view('profile',['user_id' => $user_id]);
+Route::get('/home','usersController@getUser',function ($user_id) {
+	return view('homePage',array('user_id' => $user_id));
 });
 
-Route::get('/home',function ($user_id) {
-	return view('homePage',['user_id' => $user_id]);
+Route::get('/settings','usersController@getUser',function ($user_id) {
+	return view('settings',array('user_id' => $user_id));
 });
-
-Route::get('/settings',function ($user_id) {
-	return view('settings',['user_id' => $user_id]);
-});
-
+/*
 Route::post('/add/task','tasksController@addTask');
 Route::post('/add/user','usersController@addUser');
 
@@ -34,6 +30,10 @@ Route::post('/delete/task','tasksController@deleteTask');
 Route::post('/delete/user','usersController@deleteUser');
 
 Route::post('/update/task','tasksController@updateTask');
-Route::post('/update/user','usersController@updateUser');
+// Route::post('/update/user','usersController@updateUser');
+*/
+
+Route::resource('users','usersController');
+Route::resource('tasks','tasksController');
 
 
